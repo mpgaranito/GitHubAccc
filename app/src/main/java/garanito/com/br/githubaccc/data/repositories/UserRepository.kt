@@ -1,6 +1,7 @@
 package garanito.com.br.githubaccc.data.repositories
 
 import android.arch.lifecycle.LiveData
+import android.util.Log
 import garanito.com.br.githubaccc.data.local.entity.User
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -25,19 +26,27 @@ constructor(private val webservice: UserWebService, private val userDao: UserDao
         executor.execute {
 
             val userExists = userDao.hasUser(userLogin, getMaxRefreshTime(Date())) != null
-
+            Log.v("Usuario", "Existe" + userExists )
             if (!userExists) {
                 webservice.getUser(userLogin).enqueue(object : Callback<User> {
+
+
                     override fun onResponse(call: Call<User>, response: Response<User>) {
                         executor.execute {
                             val user = response.body()
                             user?.lastRefresh = Date()
-                            if (user != null)
-                                userDao.save(user)
+                            if (user != null) {
+                                Log.v("Usuario", "Usuario: " + user.toString() +  " - " +user.lastRefresh)
+                                if (user.name != null)
+                                    userDao.save(user)
+                            } else
+                                Log.w("Usuario", "Usuario: Não Encontrado")
                         }
                     }
 
-                    override fun onFailure(call: Call<User>, t: Throwable) {}
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+                        Log.e("erro", "Erooorrrr" + t.toString(), t)
+                    }
                 })
             }
         }

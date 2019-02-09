@@ -51,7 +51,7 @@ class AppModule {
     fun provideRetrofit(gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl("http://api.github.com")
+                .baseUrl("https://api.github.com")
                 .build()
     }
 
