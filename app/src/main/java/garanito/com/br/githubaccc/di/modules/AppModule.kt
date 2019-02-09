@@ -11,6 +11,7 @@ import garanito.com.br.githubaccc.data.local.MeuBancoDeDados
 import garanito.com.br.githubaccc.data.local.dao.UserDao
 import garanito.com.br.githubaccc.data.remote.UserWebService
 import garanito.com.br.githubaccc.data.repositories.UserRepository
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.Executor
@@ -27,6 +28,7 @@ class AppModule {
                 "meuqueridobanco.db").build()
     }
 
+ 
     @Singleton
     @Provides
     fun provideUserDao(database: MeuBancoDeDados): UserDao {

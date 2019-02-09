@@ -17,6 +17,6 @@ interface UserDao{
     @Query("SELECT * FROM USER WHERE login=:login")
     fun load(login : String) : LiveData<User>
 
-    @Query("SELECT * FROM USER WHERE login=:login and lastRefresh=:lastRefresh LIMIT 1")
+    @Query("SELECT * FROM USER WHERE login=:login and lastRefresh>:lastRefresh LIMIT 1")
     fun hasUser(login: String, lastRefresh: Date): User
 }
