@@ -8,6 +8,8 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjectionModule
+import garanito.com.br.githubaccc.MyApp
+import garanito.com.br.githubaccc.MyApp_MembersInjector
 import garanito.com.br.githubaccc.di.modules.AcitityModule
 import garanito.com.br.githubaccc.di.modules.AppModule
 import garanito.com.br.githubaccc.di.modules.AppModule_ProvideDataBaseFactory
@@ -31,4 +33,5 @@ interface AppComponent {
 
         fun build(): AppComponent
     }
+    fun  inject(app: MyApp)
 }
