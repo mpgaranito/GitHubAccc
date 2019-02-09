@@ -27,6 +27,7 @@ class UserProfileFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: UserProfileViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -37,7 +38,10 @@ class UserProfileFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setUpDagger()
+        setUpViewModel()
         setUpView()
+
     }
 
     fun setUpView() {
@@ -45,7 +49,8 @@ class UserProfileFragment : Fragment() {
             viewModel.getUser(etUsuario.text.toString())
             viewModel.user.observe(this, Observer {
                 tvUsuario.text = it?.name
-                Picasso.get().load(it?.avatarURL).into(ivUsuario)
+                Picasso.get().load(it?.avatarURL)
+                        .into(ivUsuario)
             })
         }
     }
@@ -56,7 +61,9 @@ class UserProfileFragment : Fragment() {
 
 
     fun setUpViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(UserProfileViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,
+                viewModelFactory)
+                .get(UserProfileViewModel::class.java)
     }
 
 
