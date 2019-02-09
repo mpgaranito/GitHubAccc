@@ -28,7 +28,24 @@ class AppModule {
                 "meuqueridobanco.db").build()
     }
 
- 
+    @Provides
+    @Singleton
+    fun provideOkhttp() : OkHttpClient {
+        return OkHttpClient.Builder()
+                .addNetworkInterceptor(StethoInterceptor())
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .baseUrl("https://api.github.com")
+                .client(okHttpClient)
+                .build()
+    }
+
     @Singleton
     @Provides
     fun provideUserDao(database: MeuBancoDeDados): UserDao {
@@ -47,7 +64,7 @@ class AppModule {
         return GsonBuilder().create()
     }
 
-
+/*
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson): Retrofit {
@@ -56,7 +73,7 @@ class AppModule {
                 .baseUrl("https://api.github.com")
                 .build()
     }
-
+*/
 
     @Singleton
     @Provides
