@@ -13,5 +13,5 @@ class UserProfileViewModel @Inject constructor(var userRepository:UserRepository
     fun getUser(login: String)  {
       user   = userRepository.getUser(login)
     }
-    
+
 }
