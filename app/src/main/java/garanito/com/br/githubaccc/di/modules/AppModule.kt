@@ -3,6 +3,7 @@ package garanito.com.br.githubaccc.di.modules
 import android.app.Application
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
