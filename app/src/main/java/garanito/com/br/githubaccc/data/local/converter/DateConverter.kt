@@ -1,8 +1,7 @@
 package garanito.com.br.githubaccc.data.local.converter
 
 import android.arch.persistence.room.TypeConverter
-import java.sql.Date
-import java.sql.Timestamp
+import java.util.*
 
 //Criar classe statica
 object DateConverter{
